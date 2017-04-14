@@ -25,21 +25,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 describe('ptz-log-file', function () {
     describe('LogFile', function () {
         it('create ./logs/ folder ', function () {
-            var dir = './logs/';
-            if ((0, _fs.existsSync)(dir)) _rimraf2.default.sync(dir);
-            var log = (0, _index2.default)({ dir: dir });
-            (0, _ptzAssert.ok)((0, _fs.existsSync)(dir));
+            if ((0, _fs.existsSync)(_index.dirDefault)) _rimraf2.default.sync(_index.dirDefault);
+            var log = (0, _index2.default)({});
+            (0, _ptzAssert.ok)((0, _fs.existsSync)(_index.dirDefault));
         });
         it('create ./logs/log-YYYY-MM-DD.txt file ', function () {
-            var dir = './logs/';
             var date = (0, _moment2.default)().format(_index.dtFormatFileDefault);
-            var fileName = _path2.default.join(dir, '/log-' + date + '.txt');
-            if ((0, _fs.existsSync)(fileName)) _rimraf2.default.sync(dir);
-            var log = (0, _index2.default)({ dir: dir });
+            var fileName = _path2.default.join(_index.dirDefault, '/log-' + date + '.txt');
+            if ((0, _fs.existsSync)(fileName)) _rimraf2.default.sync(_index.dirDefault);
+            var log = (0, _index2.default)({});
             var logMsg = 'testing creating log file';
             log(logMsg);
             console.log(fileName);
             (0, _ptzAssert.ok)((0, _fs.existsSync)(fileName), 'File not created');
+        });
+        it('log obj', function () {
+            var log = (0, _index2.default)({});
+            log({ hi: 'hoy', a: 3, b: [1, 2, 3] });
         });
     });
 });

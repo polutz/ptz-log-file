@@ -4,16 +4,17 @@ import path from 'path';
 import { Ilog, log as logBase } from 'ptz-log';
 
 interface ILogFileArgs {
-    dir: string;
+    dir?: string;
     dtFormatFile?: string;
     dtFormatLog?: string;
 }
 
+const dirDefault = './logs/';
 const dtFormatFileDefault = 'YYYY-MM-DD';
 const dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
 
 function LogFile({
-    dir,
+    dir = dirDefault,
     dtFormatFile = dtFormatFileDefault,
     dtFormatLog = dtFormatLogDefault }: ILogFileArgs): Ilog {
 
@@ -37,7 +38,18 @@ function getFileTxt(dtFormatLog, args): string {
     var txt =
         `\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ${date} \n`;
-    args.forEach(arg => txt += arg);
+
+    if (Object.prototype.toString.call(args) === '[object Array]')
+        args.forEach(arg => {
+            try {
+                txt += arg;
+            } catch (err) {
+                logBase('Error', err);
+            }
+        });
+    else
+        txt += args;
+
     txt += '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< \n';
     return txt;
 }
@@ -56,5 +68,6 @@ export default LogFile;
 export {
     LogFile,
     dtFormatFileDefault,
-    dtFormatLogDefault
+    dtFormatLogDefault,
+    dirDefault
 };
