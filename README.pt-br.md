@@ -11,7 +11,7 @@
 [pt-br](https://github.com/polutz/ptz-log-file/blob/master/README.pt-br.md)
 [en-us](https://github.com/polutz/ptz-log-file/blob/master/README.md)
 
-ptz-log-file é um módulo Polutz.
+ptz-log-file é um incrível módulo para escrever seus logs em arquivos.
 
 
 ## Como usar
@@ -22,9 +22,11 @@ ptz-log-file é um módulo Polutz.
 ```
 
 ### Como usar
-```
-    import  from ptz-log-file;
+```javascript
+    import LogFile from ptz-log-file;
+    const log = logFile({ dir: './logs' });
 
+    log('Hi!');
 ```
 
 
