@@ -1,0 +1,9 @@
+{
+  "generator-ptz": {
+    "promptValues": {
+      "appname": "ptz-log-file",
+      "githubAuthor": "polutz",
+      "codecovToken": "03ede4a2-73c1-4e09-b221-43759533feba"
+    }
+  }
+}
