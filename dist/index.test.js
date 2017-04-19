@@ -41,7 +41,21 @@ describe('ptz-log-file', function () {
         });
         it('log obj', function () {
             var log = (0, _index2.default)({});
-            log({ hi: 'hoy', a: 3, b: [1, 2, 3] });
+            log({ hi: 'hoy', a: 3, b: [{ test: 'as', test2: 2 }, 2, 3] });
+        });
+        it('log msg and class instance', function () {
+            var log = (0, _index2.default)({});
+            var obj = {
+                valueOf: function valueOf() {
+                    console.log('valueOf');
+                    return {};
+                },
+                toString: function toString() {
+                    console.log('toString');
+                    return {};
+                }
+            };
+            log('getAuthToken input:', obj);
         });
     });
 });

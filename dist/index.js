@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.dirDefault = exports.dtFormatLogDefault = exports.dtFormatFileDefault = exports.LogFile = undefined;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _fs = require('fs');
 
 var _moment = require('moment');
@@ -48,9 +50,10 @@ function getFileTxt(dtFormatLog, args) {
     var txt = '\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n' + date + ' \n';
     if (Object.prototype.toString.call(args) === '[object Array]') args.forEach(function (arg) {
         try {
-            txt += arg;
+            if ((typeof arg === 'undefined' ? 'undefined' : _typeof(arg)) === 'object') txt += JSON.stringify(arg);else txt += String(arg);
         } catch (err) {
-            (0, _ptzLog.log)('Error', err);
+            (0, _ptzLog.log)('Error writing to log file:', err, 'args:', args, 'arg:', arg);
+            throw err;
         }
     });else txt += args;
     txt += '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< \n';

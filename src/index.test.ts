@@ -34,7 +34,22 @@ describe('ptz-log-file', () => {
 
         it('log obj', () => {
             const log = LogFile({});
-            log({ hi: 'hoy', a: 3, b: [1, 2, 3] });
+            log({ hi: 'hoy', a: 3, b: [{ test: 'as', test2: 2 }, 2, 3] });
+        });
+
+        it('log msg and class instance', () => {
+            const log = LogFile({});
+            const obj = {
+                valueOf: () => {
+                    console.log('valueOf');
+                    return {}; // not a primitive, keep going
+                },
+                toString: () => {
+                    console.log('toString');
+                    return {}; // not a primitive, keep going
+                }
+            };
+            log('getAuthToken input:', obj);
         });
     });
 });

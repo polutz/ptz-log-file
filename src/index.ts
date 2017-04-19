@@ -42,9 +42,13 @@ ${date} \n`;
     if (Object.prototype.toString.call(args) === '[object Array]')
         args.forEach(arg => {
             try {
-                txt += arg;
+                if (typeof arg === 'object')
+                    txt += JSON.stringify(arg);
+                else
+                    txt += String(arg);
             } catch (err) {
-                logBase('Error', err);
+                logBase('Error writing to log file:', err, 'args:', args, 'arg:', arg);
+                throw err;
             }
         });
     else
