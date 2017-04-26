@@ -13,12 +13,15 @@ describe('ptz-log-file', () => {
             ok(log);
             ok(existsSync(dirDefault));
         });
-        it('create ./logs/log-YYYY-MM-DD.txt file ', () => {
+        it('create ./logsTest/log-YYYY-MM-DD.txt file ', () => {
+            const dirTest = './logsTest/';
             const date = moment().format(dtFormatFileDefault);
-            const fileName = path.join(dirDefault, `/log-${date}.txt`);
+            const fileName = path.join(dirTest, `/log-${date}.txt`);
             if (existsSync(fileName))
-                rimraf.sync(dirDefault);
-            const log = LogFile({});
+                rimraf.sync(dirTest);
+            const log = LogFile({
+                dir: dirTest
+            });
             const logMsg = 'testing creating log file';
             log(logMsg);
             console.log(fileName);
