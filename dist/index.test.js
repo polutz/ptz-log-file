@@ -27,6 +27,7 @@ describe('ptz-log-file', function () {
         it('create ./logs/ folder ', function () {
             if ((0, _fs.existsSync)(_index.dirDefault)) _rimraf2.default.sync(_index.dirDefault);
             var log = (0, _index2.default)({});
+            (0, _ptzAssert.ok)(log);
             (0, _ptzAssert.ok)((0, _fs.existsSync)(_index.dirDefault));
         });
         it('create ./logs/log-YYYY-MM-DD.txt file ', function () {
@@ -59,4 +60,5 @@ describe('ptz-log-file', function () {
         });
     });
 });
+//# sourceMappingURL=index.test.js.map
 //# sourceMappingURL=index.test.js.map
