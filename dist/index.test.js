@@ -52,11 +52,11 @@ describe('ptz-log-file', function () {
             var obj = {
                 valueOf: function valueOf() {
                     console.log('valueOf');
-                    return {};
+                    return {}; // not a primitive, keep going
                 },
                 toString: function toString() {
                     console.log('toString');
-                    return {};
+                    return {}; // not a primitive, keep going
                 }
             };
             log('getAuthToken input:', obj);
