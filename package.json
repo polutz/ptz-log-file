@@ -1,6 +1,6 @@
 {
   "name": "ptz-log-file",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ptz-log-file is an awesome module to write your logs in files.",
   "main": "dist/index.js",
   "typings": "src/index.ts",
