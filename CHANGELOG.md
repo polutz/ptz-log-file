@@ -1,6 +1,22 @@
 ## master
 
 
+## 1.0.4 (May 13, 2017)
+
+* Add custom log feature    
+    -Now you can pass a custom log format function
+```javascript
+        const log = LogFile({
+            log: (...args) => {
+                console.log('---custom--->>', ...args);
+                done();
+            }
+        });
+        log('works');
+```
+
+* Add docs by typedocs  
+
 ## 1.0.3 (April 28, 2017)
 
 * Transpiling Typescript to esnext.
