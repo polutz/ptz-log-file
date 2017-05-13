@@ -5,16 +5,21 @@ import { log as logBase } from 'ptz-log';
 const dirDefault = './logs/';
 const dtFormatFileDefault = 'YYYY-MM-DD';
 const dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
-function LogFile({ dir = dirDefault, dtFormatFile = dtFormatFileDefault, dtFormatLog = dtFormatLogDefault }) {
-    if (!existsSync(dir))
-        mkdirSync(dir);
-    function log(...args) {
-        logBase(...args);
-        const date = moment().format(dtFormatFile);
-        const fileName = path.join(dir, `/log-${date}.txt`);
-        writeFile(fileName, getFileTxt(dtFormatLog, args));
+function LogFile(args) {
+    args = args || {};
+    args.log = args.log || logBase;
+    args.dir = args.dir || dirDefault;
+    args.dtFormatFile = args.dtFormatFile || dtFormatFileDefault;
+    args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
+    if (!existsSync(args.dir))
+        mkdirSync(args.dir);
+    function _log(...logArgs) {
+        args.log(...logArgs);
+        const date = moment().format(args.dtFormatFile);
+        const fileName = path.join(args.dir, `/log-${date}.txt`);
+        writeFile(args.log, fileName, getFileTxt(args.dtFormatLog, logArgs));
     }
-    return log;
+    return _log;
 }
 function getFileTxt(dtFormatLog, args) {
     const date = moment().format();
@@ -38,10 +43,10 @@ ${date} \n`;
     txt += '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< \n';
     return txt;
 }
-function writeFile(fileName, txt) {
+function writeFile(log, fileName, txt) {
     appendFile(fileName, txt, (err) => {
         if (err) {
-            logBase('Error saving Log!', err);
+            log('Error saving Log!', err);
             throw err;
         }
     });

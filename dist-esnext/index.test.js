@@ -45,6 +45,15 @@ describe('ptz-log-file', () => {
             };
             log('getAuthToken input:', obj);
         });
+        it('custom log', (done) => {
+            const log = LogFile({
+                log: (...args) => {
+                    console.log('---custom--->>', ...args);
+                    done();
+                }
+            });
+            log('works');
+        });
     });
 });
 //# sourceMappingURL=index.test.js.map

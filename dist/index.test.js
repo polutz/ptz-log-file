@@ -61,6 +61,21 @@ describe('ptz-log-file', function () {
             };
             log('getAuthToken input:', obj);
         });
+        it('custom log', function (done) {
+            var log = (0, _index2.default)({
+                log: function log() {
+                    var _console;
+
+                    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                        args[_key] = arguments[_key];
+                    }
+
+                    (_console = console).log.apply(_console, ['---custom--->>'].concat(args));
+                    done();
+                }
+            });
+            log('works');
+        });
     });
 });
 //# sourceMappingURL=index.test.js.map

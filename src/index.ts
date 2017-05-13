@@ -4,6 +4,13 @@ import path from 'path';
 import { Ilog, log as logBase } from 'ptz-log';
 
 interface ILogFileArgs {
+    /**
+     * Use your custom log if you do NOT want to use the default ptz-log
+     */
+    log?: Ilog;
+    /**
+     * Use your custom dir if you do NOT want to use the default './logs'
+     */
     dir?: string;
     dtFormatFile?: string;
     dtFormatLog?: string;
@@ -13,24 +20,27 @@ const dirDefault = './logs/';
 const dtFormatFileDefault = 'YYYY-MM-DD';
 const dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
 
-function LogFile({
-    dir = dirDefault,
-    dtFormatFile = dtFormatFileDefault,
-    dtFormatLog = dtFormatLogDefault }: ILogFileArgs): Ilog {
+function LogFile(args: ILogFileArgs): Ilog {
+     args = args || {};
 
-    if (!existsSync(dir))
-        mkdirSync(dir);
+     args.log = args.log || logBase;
+     args.dir = args.dir || dirDefault;
+     args.dtFormatFile = args.dtFormatFile || dtFormatFileDefault;
+     args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
 
-    function log(...args): void {
-        logBase(...args);
+     if (!existsSync(args.dir))
+        mkdirSync(args.dir);
 
-        const date = moment().format(dtFormatFile);
-        const fileName = path.join(dir, `/log-${date}.txt`);
+     function _log(...logArgs): void {
+        args.log(...logArgs);
 
-        writeFile(fileName, getFileTxt(dtFormatLog, args));
+        const date = moment().format(args.dtFormatFile);
+        const fileName = path.join(args.dir, `/log-${date}.txt`);
+
+        writeFile(args.log, fileName, getFileTxt(args.dtFormatLog, logArgs));
     }
 
-    return log;
+     return _log;
 }
 
 function getFileTxt(dtFormatLog, args): string {
@@ -58,10 +68,10 @@ ${date} \n`;
     return txt;
 }
 
-function writeFile(fileName: string, txt: string): void {
+function writeFile(log: Ilog, fileName: string, txt: string): void {
     appendFile(fileName, txt, (err) => {
         if (err) {
-            logBase('Error saving Log!', err);
+            log('Error saving Log!', err);
             throw err;
         }
     });
