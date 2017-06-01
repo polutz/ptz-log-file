@@ -5,6 +5,9 @@ import { log as logBase } from 'ptz-log';
 const dirDefault = './logs/';
 const dtFormatFileDefault = 'YYYY-MM-DD';
 const dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
+/**
+ * Returns a closured log function to write log into files.
+ */
 function LogFile(args) {
     args = args || {};
     args.log = args.log || logBase;
@@ -21,8 +24,13 @@ function LogFile(args) {
     }
     return _log;
 }
+/**
+ * Get the text to write in the file for each log.
+ *
+ * You can create another functions as templates.
+ */
 function getFileTxt(dtFormatLog, args) {
-    const date = moment().format();
+    const date = moment().format(dtFormatLog);
     var txt = `\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ${date} \n`;
     if (Object.prototype.toString.call(args) === '[object Array]')
@@ -43,6 +51,9 @@ ${date} \n`;
     txt += '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< \n';
     return txt;
 }
+/**
+ * Append the log text to the log file.
+ */
 function writeFile(log, fileName, txt) {
     appendFile(fileName, txt, (err) => {
         if (err) {

@@ -1,18 +1,40 @@
 import { appendFile, existsSync, mkdirSync } from 'fs';
 import moment from 'moment';
 import path from 'path';
-import { Ilog, log as logBase } from 'ptz-log';
+import { ILog, log as logBase } from 'ptz-log';
 
+/**
+ * Options to create log file
+ */
 interface ILogFileArgs {
     /**
-     * Use your custom log if you do NOT want to use the default ptz-log
+     * Use your custom log function if you do NOT want to use the default ptz-log
      */
-    log?: Ilog;
+    log?: ILog;
+
     /**
-     * Use your custom dir if you do NOT want to use the default './logs'
+     * Directory to store the log files
+     *
+     * Default dir is './logs/'
      */
     dir?: string;
+
+    /**
+     * The generated log file name will be:
+     *
+     * `${dir}/log-${date}.txt`
+     *
+     * Default format to date is 'YYYY-MM-DD'
+     */
     dtFormatFile?: string;
+
+    /**
+     * The generated log file name will be:
+     *
+     * `${dir}/log-${date}.txt`
+     *
+     * Default format is 'H:mm:ss MMMM Do YYYY'
+     */
     dtFormatLog?: string;
 }
 
@@ -20,18 +42,21 @@ const dirDefault = './logs/';
 const dtFormatFileDefault = 'YYYY-MM-DD';
 const dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
 
-function LogFile(args: ILogFileArgs): Ilog {
-     args = args || {};
+/**
+ * Returns a closured log function to write log into files.
+ */
+function LogFile(args: ILogFileArgs): ILog {
+    args = args || {};
 
-     args.log = args.log || logBase;
-     args.dir = args.dir || dirDefault;
-     args.dtFormatFile = args.dtFormatFile || dtFormatFileDefault;
-     args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
+    args.log = args.log || logBase;
+    args.dir = args.dir || dirDefault;
+    args.dtFormatFile = args.dtFormatFile || dtFormatFileDefault;
+    args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
 
-     if (!existsSync(args.dir))
+    if (!existsSync(args.dir))
         mkdirSync(args.dir);
 
-     function _log(...logArgs): void {
+    function _log(...logArgs): void {
         args.log(...logArgs);
 
         const date = moment().format(args.dtFormatFile);
@@ -40,11 +65,16 @@ function LogFile(args: ILogFileArgs): Ilog {
         writeFile(args.log, fileName, getFileTxt(args.dtFormatLog, logArgs));
     }
 
-     return _log;
+    return _log;
 }
 
-function getFileTxt(dtFormatLog, args): string {
-    const date = moment().format();
+/**
+ * Get the text to write in the file for each log.
+ *
+ * You can create another functions as templates.
+ */
+function getFileTxt(dtFormatLog, args: any): string {
+    const date = moment().format(dtFormatLog);
     var txt =
         `\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ${date} \n`;
@@ -68,7 +98,10 @@ ${date} \n`;
     return txt;
 }
 
-function writeFile(log: Ilog, fileName: string, txt: string): void {
+/**
+ * Append the log text to the log file.
+ */
+function writeFile(log: ILog, fileName: string, txt: string): void {
     appendFile(fileName, txt, (err) => {
         if (err) {
             log('Error saving Log!', err);

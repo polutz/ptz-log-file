@@ -24,6 +24,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var dirDefault = './logs/';
 var dtFormatFileDefault = 'YYYY-MM-DD';
 var dtFormatLogDefault = 'H:mm:ss MMMM Do YYYY';
+/**
+ * Returns a closured log function to write log into files.
+ */
 function LogFile(args) {
     args = args || {};
     args.log = args.log || _ptzLog.log;
@@ -45,8 +48,13 @@ function LogFile(args) {
     }
     return _log;
 }
+/**
+ * Get the text to write in the file for each log.
+ *
+ * You can create another functions as templates.
+ */
 function getFileTxt(dtFormatLog, args) {
-    var date = (0, _moment2.default)().format();
+    var date = (0, _moment2.default)().format(dtFormatLog);
     var txt = '\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n' + date + ' \n';
     if (Object.prototype.toString.call(args) === '[object Array]') args.forEach(function (arg) {
         try {
@@ -59,6 +67,9 @@ function getFileTxt(dtFormatLog, args) {
     txt += '\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< \n';
     return txt;
 }
+/**
+ * Append the log text to the log file.
+ */
 function writeFile(log, fileName, txt) {
     (0, _fs.appendFile)(fileName, txt, function (err) {
         if (err) {
