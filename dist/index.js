@@ -9,6 +9,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _fs = require('fs');
 
+var _mkdirp = require('mkdirp');
+
+var _mkdirp2 = _interopRequireDefault(_mkdirp);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -33,7 +37,7 @@ function LogFile(args) {
     args.dir = args.dir || dirDefault;
     args.dtFormatFile = args.dtFormatFile || dtFormatFileDefault;
     args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
-    if (!(0, _fs.existsSync)(args.dir)) (0, _fs.mkdirSync)(args.dir);
+    if (!(0, _fs.existsSync)(args.dir)) _mkdirp2.default.sync(args.dir);
     function _log() {
         var _args;
 

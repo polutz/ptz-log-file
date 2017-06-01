@@ -30,11 +30,11 @@ describe('ptz-log-file', function () {
             (0, _ptzAssert.ok)(log);
             (0, _ptzAssert.ok)((0, _fs.existsSync)(_index.dirDefault));
         });
-        it('create ./logsTest/log-YYYY-MM-DD.txt file ', function () {
-            var dirTest = './logsTest/';
+        it('create ./logs/Test/subFolder/log-YYYY-MM-DD.txt file ', function () {
+            var dirTest = './logs/Test/subFolder/';
             var date = (0, _moment2.default)().format(_index.dtFormatFileDefault);
             var fileName = _path2.default.join(dirTest, '/log-' + date + '.txt');
-            if ((0, _fs.existsSync)(fileName)) _rimraf2.default.sync(dirTest);
+            if ((0, _fs.existsSync)('./logs/Test/')) _rimraf2.default.sync('./logs/Test/');
             var log = (0, _index2.default)({
                 dir: dirTest
             });

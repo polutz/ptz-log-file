@@ -47,7 +47,9 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
-    "ptz-log": "^1.0.0",
-    "moment": "^2.18.1"
+    "@types/mkdirp": "^0.3.29",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.18.1",
+    "ptz-log": "^1.0.0"
   }
 }

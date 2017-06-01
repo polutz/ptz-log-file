@@ -1,4 +1,5 @@
-import { appendFile, existsSync, mkdirSync } from 'fs';
+import { appendFile, existsSync } from 'fs';
+import mkdirp from 'mkdirp';
 import moment from 'moment';
 import path from 'path';
 import { ILog, log as logBase } from 'ptz-log';
@@ -54,7 +55,7 @@ function LogFile(args: ILogFileArgs): ILog {
     args.dtFormatLog = args.dtFormatLog || dtFormatLogDefault;
 
     if (!existsSync(args.dir))
-        mkdirSync(args.dir);
+        mkdirp.sync(args.dir);
 
     function _log(...logArgs): void {
         args.log(...logArgs);
