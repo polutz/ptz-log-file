@@ -101,7 +101,7 @@
 					<div class="tsd-signature tsd-kind-icon">dir<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"./logs/"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;./logs/&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L19">index.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L41">index.ts:41</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -111,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">dt<wbr>Format<wbr>File<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"YYYY-MM-DD"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;YYYY-MM-DD&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L20">index.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L42">index.ts:42</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -121,7 +121,7 @@
 					<div class="tsd-signature tsd-kind-icon">dt<wbr>Format<wbr>Log<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"H:mm:ss MMMM Do YYYY"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;H:mm:ss MMMM Do YYYY&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L21">index.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L43">index.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,22 +132,27 @@
 					<a name="logfile" class="tsd-anchor"></a>
 					<h3>Log<wbr>File</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Log<wbr>File<span class="tsd-signature-symbol">(</span>args<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.ilogfileargs.html" class="tsd-signature-type">ILogFileArgs</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Ilog</span></li>
+						<li class="tsd-signature tsd-kind-icon">Log<wbr>File<span class="tsd-signature-symbol">(</span>args<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.ilogfileargs.html" class="tsd-signature-type">ILogFileArgs</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ILog</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L23">index.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L48">index.ts:48</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a closured log function to write log into files.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>args: <a href="../interfaces/_index_.ilogfileargs.html" class="tsd-signature-type">ILogFileArgs</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Ilog</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ILog</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -161,9 +166,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L46">index.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L76">index.ts:76</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the text to write in the file for each log.</p>
+								</div>
+								<p>You can create another functions as templates.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -181,19 +192,24 @@
 					<a name="writefile" class="tsd-anchor"></a>
 					<h3>write<wbr>File</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">write<wbr>File<span class="tsd-signature-symbol">(</span>log<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Ilog</span>, fileName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, txt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">write<wbr>File<span class="tsd-signature-symbol">(</span>log<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ILog</span>, fileName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, txt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/5a5612a/src/index.ts#L71">index.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/polutz/ptz-log-file/blob/e24f3a0/src/index.ts#L104">index.ts:104</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Append the log text to the log file.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>log: <span class="tsd-signature-type">Ilog</span></h5>
+									<h5>log: <span class="tsd-signature-type">ILog</span></h5>
 								</li>
 								<li>
 									<h5>fileName: <span class="tsd-signature-type">string</span></h5>
