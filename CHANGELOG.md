@@ -1,6 +1,11 @@
 ## master
 
 
+## 1.0.5 (June 1, 2017)
+
+* Fix sub folder creation.
+* Update ptz-log.
+
 ## 1.0.4 (May 13, 2017)
 
 * Add custom log feature    
