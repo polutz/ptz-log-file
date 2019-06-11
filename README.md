@@ -24,7 +24,7 @@ ptz-log-file is an awesome module to write your logs in files.
 ### How to use
 ```javascript
     import LogFile from "ptz-log-file";
-    const log = logFile({ dir: './logs' });
+    const log = LogFile({ dir: './logs' });
 
     log('Hi!');
 ```
